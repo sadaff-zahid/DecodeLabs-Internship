@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="StudyPlanner: a simple, responsive tool to plan your study tasks.">
+  <title>StudyPlanner</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#tasks-title">Skip to tasks</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <h1 class="logo">StudyPlanner</h1>
+      <nav aria-label="Main navigation">
+        <ul class="nav-list">
+          <li><a href="#add-title">Add task</a></li>
+          <li><a href="#tasks-title">My tasks</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container layout">
+
+    <!-- Sidebar: form + progress -->
+    <aside class="sidebar">
+      <section class="card" aria-labelledby="add-title">
+        <h2 id="add-title">Add a task</h2>
+        <form id="task-form" novalidate>
+          <div class="field">
+            <label for="task-title">What do you need to do?</label>
+            <input type="text" id="task-title" maxlength="80" placeholder="e.g. Revise chapter 3">
+          </div>
+          <div class="field">
+            <label for="task-subject">Subject</label>
+            <input type="text" id="task-subject" maxlength="30" placeholder="e.g. Maths">
+          </div>
+          <div class="field">
+            <label for="task-date">Due date</label>
+            <input type="date" id="task-date">
+          </div>
+          <p id="form-error" class="error" role="alert"></p>
+          <button type="submit" class="btn">Add task</button>
+        </form>
+      </section>
+
+      <section class="card" aria-labelledby="progress-title">
+        <h2 id="progress-title">Progress</h2>
+        <p id="progress-text">No tasks yet.</p>
+        <div class="bar" aria-hidden="true"><div id="bar-fill" class="bar-fill"></div></div>
+      </section>
+    </aside>
+
+    <!-- Main content: the task list -->
+    <article class="card" aria-labelledby="tasks-title">
+      <h2 id="tasks-title" tabindex="-1">My tasks</h2>
+
+      <div class="filters" role="group" aria-label="Filter tasks">
+        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" class="filter-btn" data-filter="pending" aria-pressed="false">Pending</button>
+        <button type="button" class="filter-btn" data-filter="done" aria-pressed="false">Done</button>
+      </div>
+
+      <ul id="task-list" class="task-list" aria-live="polite"></ul>
+      <p id="empty-message" class="empty" hidden>Nothing here yet. Add your first task!</p>
+    </article>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>StudyPlanner · Responsive Frontend Interface · 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
