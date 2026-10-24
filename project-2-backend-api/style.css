@@ -1,0 +1,291 @@
+/* ---------- Colors and fonts (2025 palette) ---------- */
+:root {
+  --mocha: #A5856F;        /* Mocha Mousse: stability */
+  --mocha-dark: #6F4E3C;   /* darker mocha so text and buttons are easy to read */
+  --blue: #A0D4E0;         /* Ethereal Blue: trust */
+  --grey: #F2F0EA;         /* Moonlit Grey: refinement */
+  --text: #3B2A20;
+  --muted: #6B5A4E;
+  --white: #ffffff;
+  --line: #DDD6CB;
+
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+}
+
+/* ---------- Base styles ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--grey);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+h1, h2 {
+  font-family: var(--font-heading);
+  margin: 0 0 0.75rem;
+  line-height: 1.2;
+}
+
+/* clamp() makes the text grow smoothly with the screen size */
+h1 { font-size: clamp(1.4rem, 1rem + 2vw, 2rem); font-weight: 700; }
+h2 { font-size: clamp(1.15rem, 1rem + 1vw, 1.5rem); font-weight: 600; }
+
+:focus-visible {
+  outline: 3px solid #1F6F8B;
+  outline-offset: 2px;
+}
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  background: var(--mocha-dark);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+}
+.skip-link:focus { left: 0.5rem; top: 0.5rem; }
+
+/* ---------- Header and navigation (Flexbox) ---------- */
+.site-header {
+  background: var(--white);
+  border-bottom: 3px solid var(--blue);
+}
+
+.header-inner {
+  display: flex;
+  flex-direction: column;      /* phone: logo on top, links below */
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+.logo { margin: 0; color: var(--mocha-dark); }
+
+.nav-list {
+  display: flex;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list a {
+  display: inline-block;
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  color: var(--text);
+  font-weight: 600;
+  text-decoration: none;
+}
+.nav-list a:hover { background: var(--blue); }
+
+/* ---------- Page layout (Grid) ---------- */
+/* Mobile first: one column */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.sidebar {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.25rem;
+}
+
+/* ---------- Form ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+label { font-weight: 600; }
+
+input {
+  font: inherit;
+  min-height: 44px;            /* big enough to tap on a phone */
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--text);
+  width: 100%;
+}
+input:focus { border-color: var(--mocha-dark); }
+
+.error {
+  min-height: 1.4em;
+  margin: 0 0 0.5rem;
+  color: #B3261E;
+  font-weight: 600;
+}
+
+.btn, .filter-btn, .small-btn {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  min-height: 44px;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  background: var(--mocha-dark);
+  color: var(--white);
+  border: 2px solid var(--mocha-dark);
+}
+.btn:hover { background: var(--text); }
+
+/* ---------- Progress bar ---------- */
+.bar {
+  height: 12px;
+  background: var(--grey);
+  border-radius: 99px;
+  overflow: hidden;
+}
+.bar-fill {
+  height: 100%;
+  width: 0;
+  background: var(--mocha);
+  transition: width 0.3s;
+}
+
+/* ---------- Filters ---------- */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.filter-btn {
+  flex: 1;
+  padding: 0.4rem 0.8rem;
+  background: var(--white);
+  color: var(--mocha-dark);
+  border: 2px solid var(--mocha-dark);
+}
+.filter-btn.active {
+  background: var(--mocha-dark);
+  color: var(--white);
+}
+
+/* ---------- Task list ---------- */
+.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+/* Each task sits in a wrapper so a container query can read its width */
+.task-wrap { container-type: inline-size; }
+
+.task {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--grey);
+  border-left: 6px solid var(--mocha);
+  border-radius: 10px;
+}
+
+.task.done { border-left-color: var(--blue); }
+.task.done .task-title { text-decoration: line-through; color: var(--muted); }
+
+.task-title { margin: 0; font-weight: 600; }
+.task-info { margin: 0; font-size: 0.9rem; color: var(--muted); }
+
+.task-buttons { display: flex; gap: 0.5rem; }
+
+.small-btn {
+  padding: 0.3rem 0.9rem;
+  background: var(--white);
+  color: var(--mocha-dark);
+  border: 2px solid var(--mocha-dark);
+}
+.small-btn:hover { background: var(--blue); }
+
+/* When the task box is wide, put the text and buttons side by side */
+@container (min-width: 400px) {
+  .task {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.empty { text-align: center; color: var(--muted); }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Tablet: 768px and up ---------- */
+@media (min-width: 768px) {
+  .container { padding: 0 1.5rem; }
+
+  .header-inner {
+    flex-direction: row;       /* logo left, links right */
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .layout {
+    grid-template-columns: 1fr 2fr;   /* sidebar + main */
+    align-items: start;
+    gap: 1.5rem;
+  }
+}
+
+/* ---------- Desktop: 1024px and up ---------- */
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: 340px 1fr;
+    gap: 2rem;
+    padding-top: 2rem;
+  }
+
+  .task-list { grid-template-columns: 1fr 1fr; }  /* two columns of tasks */
+}
+
+/* ---------- Status message (loading and error text) ---------- */
+.status {
+  min-height: 1.4em;
+  margin: 0 0 0.75rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+.status.problem { color: #B3261E; }
