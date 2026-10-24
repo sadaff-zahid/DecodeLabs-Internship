@@ -1,8 +1,6 @@
 // StudyPlanner frontend. It talks to the backend API (server.js) with fetch().
 
-// If you host this page somewhere else (like GitHub Pages),
-// put the full address of your API here, e.g. "https://my-api.onrender.com/api/tasks"
-var API_URL = "/api/tasks";
+var API_URL = "https://decodelabs-internship-ji4q.onrender.com/api/tasks";
 
 // ----- Get the elements we need from the page -----
 var form = document.getElementById("task-form");
